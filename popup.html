@@ -1,0 +1,129 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Attentio</title>
+<link rel="stylesheet" href="popup.css">
+</head>
+<body>
+<div id="app">
+  <header>
+    <svg class="logo" viewBox="0 0 64 56"><use href="#leaves"/></svg>
+    <div class="brand"><h1>Attentio</h1><p id="tagline">Fewer tabs. More clarity.</p></div>
+    <div class="actions">
+      <button class="icon-btn" id="btn-stats" title="Stats"><svg viewBox="0 0 24 24"><path d="M6 20V12M12 20V5M18 20V9" stroke-width="3"/></svg></button>
+      <button class="icon-btn" id="btn-settings" title="Settings"><svg viewBox="0 0 24 24"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg></button>
+      <button class="icon-btn" id="btn-close" title="Close"><svg viewBox="0 0 24 24"><path d="M5 5l14 14M19 5L5 19"/></svg></button>
+    </div>
+  </header>
+
+  <nav id="nav">
+    <button data-view="limit" class="active"><svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="3"/><path d="M7 7V5a2 2 0 012-2h8"/></svg>Tab Limit</button>
+    <button data-view="timer"><svg viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2M9.5 2.5h5M12 2.5V5"/></svg>Focus Timer</button>
+  </nav>
+
+  <!-- Tab limit -->
+  <section id="view-limit" class="view">
+    <div class="hero">
+      <div class="hero-icon"><svg viewBox="0 0 24 24"><rect x="3" y="7" width="14" height="13" rx="3"/><path d="M7 7V5a2 2 0 012-2h10a2 2 0 012 2v10a2 2 0 01-2 2h-2"/></svg></div>
+      <div><h2>Tab Limit</h2><p>Keep your browser focused and your mind clear.</p></div>
+    </div>
+    <div class="presets" id="presets"></div>
+    <div class="info">
+      <div class="info-icon"><svg viewBox="0 0 24 24"><path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/><path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"/><path d="M15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4"/><path d="M17.599 6.5a3 3 0 0 0 .399-1.375"/><path d="M6.003 5.125A3 3 0 0 0 6.401 6.5"/><path d="M3.477 10.896a4 4 0 0 1 .585-.396"/><path d="M19.938 10.5a4 4 0 0 1 .585.396"/><path d="M6 18a4 4 0 0 1-1.967-.516"/><path d="M19.967 17.484A4 4 0 0 1 18 18"/></svg></div>
+      <div><strong id="info-title"></strong><p id="info-text"></p></div>
+    </div>
+    <div class="custom">
+      <label>Custom limit</label>
+      <div class="custom-row">
+        <div class="slider-wrap">
+          <div class="bubble" id="bubble">10</div>
+          <input type="range" id="slider" min="3" max="20" step="1">
+          <div class="ticks" id="ticks"></div>
+        </div>
+        <div class="num-box"><input type="number" id="custom-num" min="3" max="20">
+          <div class="spin"><button id="num-up" title="Increase"><svg viewBox="0 0 24 24"><path d="M6 15l6-6 6 6"/></svg></button><button id="num-down" title="Decrease"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button></div></div>
+      </div>
+    </div>
+    <div class="tip"><svg viewBox="0 0 24 24"><path d="M12 21v-9M12 12C12 8 9 6 4 6c0 4 2 6 8 6zM12 14c0-3 2-5 7-5 0 3-2 5-7 5z"/></svg>Tip: You can always change this later in settings.</div>
+  </section>
+
+  <!-- Timer -->
+  <section id="view-timer" class="view hidden">
+    <div class="ring-wrap">
+      <svg viewBox="0 0 200 200" class="ring">
+        <circle cx="100" cy="100" r="88" class="track"/>
+        <circle cx="100" cy="100" r="88" class="prog" id="prog" transform="rotate(-90 100 100)"/>
+        <circle cx="100" cy="12" r="6" class="dot"/>
+      </svg>
+      <div class="ring-center">
+        <svg class="mini-leaf" viewBox="0 0 64 56"><use href="#leaves"/></svg>
+        <div id="time">25:00</div>
+        <div id="mode-label">FOCUS</div>
+      </div>
+    </div>
+    <div class="pills" id="pills">
+      <button data-mode="pomodoro" class="active">Pomodoro</button>
+      <button data-mode="short">Short Break</button>
+      <button data-mode="long">Long Break</button>
+    </div>
+    <div class="meta" id="meta"></div>
+    <div class="controls">
+      <button class="ctl" id="reset" title="Reset"><svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 11-2.5-5.8M20 4v5h-5"/></svg></button>
+      <button class="play" id="play" title="Start"><svg viewBox="0 0 24 24" id="play-ico"><path d="M8 5v14l11-7z" fill="currentColor"/></svg></button>
+      <button class="ctl" id="skip" title="Skip"><svg viewBox="0 0 24 24"><path d="M6 5v14l9-7z" fill="currentColor"/><path d="M18 5v14"/></svg></button>
+    </div>
+    <svg class="scene" viewBox="0 0 380 150" preserveAspectRatio="none">
+      <circle cx="300" cy="120" r="22" fill="#f8dfb5" opacity=".7"/>
+      <path d="M0 70 Q60 20 130 55 T260 40 T380 60 V150 H0z" fill="#d3ddd6"/>
+      <path d="M0 95 Q70 55 150 85 T300 70 T380 90 V150 H0z" fill="#aebfb3"/>
+      <path d="M0 120 Q80 90 170 115 T380 105 V150 H0z" fill="#86a08f"/>
+      <g fill="#5f7f6c"><path id="tree" d="M0 150l9-40 9 40z"/>
+        <use href="#tree" x="20" y="-8"/><use href="#tree" x="45" y="4"/><use href="#tree" x="70" y="-10"/><use href="#tree" x="95" y="6"/><use href="#tree" x="118" y="-4"/>
+        <use href="#tree" x="250" y="2"/><use href="#tree" x="275" y="-8"/><use href="#tree" x="300" y="6"/><use href="#tree" x="325" y="-6"/><use href="#tree" x="350" y="2"/>
+      </g>
+    </svg>
+  </section>
+
+  <!-- Stats -->
+  <section id="view-stats" class="view hidden">
+    <h2 class="sec-title">Today</h2>
+    <div class="stat-grid">
+      <div class="stat"><b id="st-sessions">0</b><span>Focus sessions</span></div>
+      <div class="stat"><b id="st-minutes">0</b><span>Focus minutes</span></div>
+      <div class="stat"><b id="st-blocked">0</b><span>Tabs blocked</span></div>
+      <div class="stat"><b id="st-open">0</b><span>Tabs open now</span></div>
+    </div>
+    <button class="back" data-back>Back</button>
+  </section>
+
+  <!-- Settings -->
+  <section id="view-settings" class="view hidden">
+    <div class="pause-card">
+      <div class="pause-title"><span class="pause-ico"><svg viewBox="0 0 24 24"><path d="M8 5v14M16 5v14" stroke-width="3"/></svg></span>
+        <div><strong>Take a breather</strong><p id="pause-sub">Pause the tab limit for a while.</p></div></div>
+      <div class="chips" id="pause-chips"><button data-min="15">15 min</button><button data-min="60">1 hour</button><button data-min="-1">Until I'm back</button></div>
+      <button class="resume hidden" id="pause-resume">Resume Attentio</button>
+    </div>
+    <h2 class="sec-title">Timer settings</h2>
+    <div class="form">
+      <label>Focus (min)<input type="number" id="set-pomodoro" min="1" max="120"></label>
+      <label>Short break (min)<input type="number" id="set-short" min="1" max="60"></label>
+      <label>Long break (min)<input type="number" id="set-long" min="1" max="90"></label>
+      <label>Cycles before long break<input type="number" id="set-cycles" min="1" max="10"></label>
+    </div>
+    <button class="back" data-back>Done</button>
+  </section>
+</div>
+
+<svg width="0" height="0" style="position:absolute"><defs>
+  <g id="leaves">
+    <path d="M32 50C14 48 4 36 4 16c16 0 28 10 28 34z" fill="#2f8f64"/>
+    <path d="M32 50C50 48 60 36 60 16 44 16 32 26 32 50z" fill="#1f6b4a"/>
+    <path d="M32 52C20 38 22 18 32 2c10 16 12 36 0 50z" fill="#0f4d36"/>
+  </g>
+</defs></svg>
+<script src="shared.js"></script>
+<script src="popup.js"></script>
+</body>
+</html>
